@@ -1,9 +1,7 @@
 package com.example.springMVC1.Pessoa;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +15,20 @@ public class pessoaController {
     }
 
     @GetMapping
-    public List<pessoa> getStudent(){
-        return pessoaService.getStudents();
+    public List<pessoa> getPessoa(){
+        return pessoaService.getPessoa();
+    }
+    @PostMapping
+    public void registerPessoa(@RequestBody pessoa pessoa){
+        pessoaService.registerPessoa(pessoa);
+    }
+    @DeleteMapping(path = "{pessoaId}")
+    public void deletePessoa(@PathVariable("pessoaId") Long id){
+        pessoaService.deletePessoa(id);
+    }
+    @PutMapping(path = "{pessoaId}")
+    public void patchPessoa(@PathVariable("pessoaId") Long id,@RequestBody pessoa pessoa){
+        pessoaService.patchPessoa(id, pessoa);
     }
 
 }
